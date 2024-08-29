@@ -3,7 +3,7 @@
     <form wire:submit.prevent="calculate">
         <div class="form-group">
             <label for="loan-amount">จำนวนเงินกู้:</label>
-            <input type="number" class="form-control" id="loan-amount" wire:model.defer="loanAmount" required>
+            <input type="text" class="form-control" id="loan-amount" wire:model.defer="loanAmount" required>
         </div>
         <div class="form-group">
             <label for="interest-rate">อัตราดอกเบี้ย (ต่อปี %):</label>
@@ -75,3 +75,17 @@
         </div>
     @endif
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // ตรวจสอบการกรอกข้อมูลในช่อง "จำนวนเงินกู้"
+        $('#loan-amount').on('input', function() {
+            var value = $(this).val();
+            if (!$.isNumeric(value)) {
+                // ถ้าไม่ใช่ตัวเลข
+                $(this).val(''); // เคลียร์ช่อง
+                alert('กรุณากรอกตัวเลขเท่านั้น'); // แสดงข้อความเตือน
+            }
+        });
+    });
+</script>
